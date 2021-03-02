@@ -1,8 +1,9 @@
 {
   "name": "cdk-valheim-server",
+  "description": "A CDK construct library for running a Valheim dedicated server on AWS",
   "repository": {
     "type": "git",
-    "url": "https://github.com/user/cdk-valheim-server.git"
+    "url": "https://github.com/raykrueger/cdk-valheim-server.git"
   },
   "scripts": {
     "projen": "npx projen",
@@ -24,12 +25,12 @@
     "docgen": "npx projen docgen"
   },
   "author": {
-    "name": "user",
-    "email": "user@domain.com",
+    "name": "Ray Krueger",
+    "email": "raykrueger@gmail.com",
     "organization": false
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^1.73.0",
+    "@aws-cdk/assert": "^1.90.1",
     "@types/jest": "^26.0.20",
     "@types/node": "^10.17.0",
     "@typescript-eslint/eslint-plugin": "^4.16.1",
@@ -52,6 +53,12 @@
   },
   "peerDependencies": {
     "constructs": "^3.2.27"
+  },
+  "dependencies": {
+    "@aws-cdk/aws-ec2": "^1.91.0",
+    "@aws-cdk/aws-ecs": "^1.91.0",
+    "@aws-cdk/aws-efs": "^1.91.0",
+    "@aws-cdk/aws-elasticloadbalancingv2": "^1.91.0"
   },
   "bundledDependencies": [],
   "keywords": [

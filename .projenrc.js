@@ -1,13 +1,19 @@
 const { AwsCdkConstructLibrary } = require('projen');
 
 const project = new AwsCdkConstructLibrary({
-  author: 'user',
-  authorAddress: 'user@domain.com',
-  cdkVersion: '1.73.0',
+  name: 'cdk-valheim-server',
+  author: 'Ray Krueger',
+  authorAddress: 'raykrueger@gmail.com',
+  description: 'A CDK construct library for running a Valheim dedicated server on AWS',
+  cdkVersion: '1.90.1',
   defaultReleaseBranch: 'main',
   jsiiFqn: "projen.AwsCdkConstructLibrary",
-  name: 'cdk-valheim-server',
   repositoryUrl: 'https://github.com/user/cdk-valheim-server.git',
+  license: 'Apache-2.0',
+  repository: 'https://github.com/raykrueger/cdk-valheim-server.git',
+  deps: [
+    '@aws-cdk/aws-efs', '@aws-cdk/aws-ec2', '@aws-cdk/aws-ecs', '@aws-cdk/aws-elasticloadbalancingv2'
+  ],
 
   /* AwsCdkConstructLibraryOptions */
   // cdkAssert: true,                                                          /* Install the @aws-cdk/assert library? */
@@ -48,7 +54,6 @@ const project = new AwsCdkConstructLibrary({
   // entrypoint: 'lib/index.js',                                               /* Module entrypoint (`main` in `package.json`). */
   // homepage: undefined,                                                      /* Package's Homepage / Website. */
   // keywords: undefined,                                                      /* Keywords to include in `package.json`. */
-  // license: 'Apache-2.0',                                                    /* License's SPDX identifier. */
   // licensed: true,                                                           /* Indicates if a license should be added. */
   // maxNodeVersion: undefined,                                                /* Minimum node.js version to require via `engines` (inclusive). */
   // minNodeVersion: undefined,                                                /* Minimum Node.js version to require via package.json `engines` (inclusive). */
