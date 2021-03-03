@@ -21,8 +21,8 @@
     "watch": "npx projen watch",
     "package": "npx projen package",
     "eslint": "npx projen eslint",
-    "compat": "npx projen compat",
-    "docgen": "npx projen docgen"
+    "docgen": "npx projen docgen",
+    "compat": "npx projen compat"
   },
   "author": {
     "name": "Ray Krueger",
@@ -49,16 +49,25 @@
     "projen": "^0.16.29",
     "standard-version": "^9",
     "ts-jest": "^26.5.2",
+    "typedoc": "^0.20.28",
     "typescript": "^4.2.2"
   },
   "peerDependencies": {
+    "@aws-cdk/aws-ec2": "^1.90.1",
+    "@aws-cdk/aws-ecs": "^1.90.1",
+    "@aws-cdk/aws-efs": "^1.90.1",
+    "@aws-cdk/aws-elasticloadbalancingv2": "^1.90.1",
+    "@aws-cdk/aws-secretsmanager": "^1.90.1",
+    "@aws-cdk/core": "^1.90.1",
     "constructs": "^3.2.27"
   },
   "dependencies": {
-    "@aws-cdk/aws-ec2": "^1.91.0",
-    "@aws-cdk/aws-ecs": "^1.91.0",
-    "@aws-cdk/aws-efs": "^1.91.0",
-    "@aws-cdk/aws-elasticloadbalancingv2": "^1.91.0"
+    "@aws-cdk/aws-ec2": "^1.90.1",
+    "@aws-cdk/aws-ecs": "^1.90.1",
+    "@aws-cdk/aws-efs": "^1.90.1",
+    "@aws-cdk/aws-elasticloadbalancingv2": "^1.90.1",
+    "@aws-cdk/aws-secretsmanager": "^1.90.1",
+    "@aws-cdk/core": "^1.90.1"
   },
   "bundledDependencies": [],
   "keywords": [
@@ -66,7 +75,7 @@
   ],
   "main": "lib/index.js",
   "license": "Apache-2.0",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "jest": {
     "testMatch": [
       "**/__tests__/**/*.ts?(x)",

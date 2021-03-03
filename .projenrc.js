@@ -1,19 +1,32 @@
-const { AwsCdkConstructLibrary } = require('projen');
+const { AwsCdkConstructLibrary, ProjectType } = require('projen');
 
 const project = new AwsCdkConstructLibrary({
   name: 'cdk-valheim-server',
   author: 'Ray Krueger',
   authorAddress: 'raykrueger@gmail.com',
   description: 'A CDK construct library for running a Valheim dedicated server on AWS',
+  projectType: ProjectType.LIB,
   cdkVersion: '1.90.1',
   defaultReleaseBranch: 'main',
-  jsiiFqn: "projen.AwsCdkConstructLibrary",
+  jsiiFqn: 'projen.AwsCdkConstructLibrary',
   repositoryUrl: 'https://github.com/user/cdk-valheim-server.git',
   license: 'Apache-2.0',
   repository: 'https://github.com/raykrueger/cdk-valheim-server.git',
-  deps: [
-    '@aws-cdk/aws-efs', '@aws-cdk/aws-ec2', '@aws-cdk/aws-ecs', '@aws-cdk/aws-elasticloadbalancingv2'
+  cdkDependencies: [
+    '@aws-cdk/aws-ec2',
+    '@aws-cdk/aws-ecs',
+    '@aws-cdk/aws-efs',
+    '@aws-cdk/aws-elasticloadbalancingv2',
+    '@aws-cdk/aws-secretsmanager',
+    '@aws-cdk/core',
   ],
+  cdkAssert: true,
+  docgen: true,
+  releaseBranches: ['master'],
+  releaseToNpm: true,
+  releaseWorkflow: true,
+  releaseEveryCommit: true,
+
 
   /* AwsCdkConstructLibraryOptions */
   // cdkAssert: true,                                                          /* Install the @aws-cdk/assert library? */
