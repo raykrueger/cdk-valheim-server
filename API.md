@@ -4,18 +4,18 @@
 
 Name|Description
 ----|-----------
-[ValheimServer](#cdk-valheim-server-valheimserver)|*No description*
+[ValheimServer](#raykrueger-cdk-valheim-server-valheimserver)|*No description*
 
 
 **Structs**
 
 Name|Description
 ----|-----------
-[ValheimServerProps](#cdk-valheim-server-valheimserverprops)|*No description*
+[ValheimServerProps](#raykrueger-cdk-valheim-server-valheimserverprops)|*No description*
 
 
 
-## class ValheimServer  <a id="cdk-valheim-server-valheimserver"></a>
+## class ValheimServer  <a id="raykrueger-cdk-valheim-server-valheimserver"></a>
 
 
 
@@ -33,7 +33,7 @@ new ValheimServer(scope: Construct, id: string, props?: ValheimServerProps)
 
 * **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
-* **props** (<code>[ValheimServerProps](#cdk-valheim-server-valheimserverprops)</code>)  *No description*
+* **props** (<code>[ValheimServerProps](#raykrueger-cdk-valheim-server-valheimserverprops)</code>)  *No description*
   * **containerInsights** (<code>boolean</code>)  Do we want to enable Cloudwatch Container Insights, and incur additional cost? __*Default*__: false
   * **cpu** (<code>number</code>)  vCpu amout to be granted to ECS Fargate task. __*Default*__: DEFAULT_VCPU
   * **generatedServerPasswordSecretName** (<code>string</code>)  If we are generating a random password, what name will it be stored under in Secrets Manager? __*Default*__: DEFAULT_SERVER_PASSWORD_SECRET_NAME
@@ -61,7 +61,7 @@ Name | Type | Description
 
 
 
-## struct ValheimServerProps  <a id="cdk-valheim-server-valheimserverprops"></a>
+## struct ValheimServerProps  <a id="raykrueger-cdk-valheim-server-valheimserverprops"></a>
 
 
 
