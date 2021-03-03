@@ -1,7 +1,7 @@
 const { AwsCdkConstructLibrary, ProjectType } = require('projen');
 
 const project = new AwsCdkConstructLibrary({
-  name: 'cdk-valheim-server',
+  name: '@raykrueger/cdk-valheim-server',
   author: 'Ray Krueger',
   authorAddress: 'raykrueger@gmail.com',
   description: 'A CDK construct library for running a Valheim dedicated server on AWS',
