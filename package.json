@@ -1,5 +1,5 @@
 {
-  "name": "cdk-valheim-server",
+  "name": "@raykrueger/cdk-valheim-server",
   "description": "A CDK construct library for running a Valheim dedicated server on AWS",
   "repository": {
     "type": "git",
