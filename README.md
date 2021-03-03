@@ -65,4 +65,13 @@ app.synth();
 See [AWS Fargate Pricing](https://aws.amazon.com/fargate/pricing/) for cost
 details in your region. The default confugration deploys 1vcpu and 8gb of
 memory. In addtion, you will incur costs for EFS and some amount of network
-transfer.
+transfer. Your mileage may vary.
+
+
+## I was here
+
+Note that I built this in my free time. This has nothing to do with Iron Gate
+AB, Coffee Stain Publishing, or my employer.
+
+Enjoy!
+-Ray
