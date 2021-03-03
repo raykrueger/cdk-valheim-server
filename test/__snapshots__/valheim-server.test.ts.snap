@@ -64,7 +64,7 @@ Object {
         "LoadBalancerArn": Object {
           "Ref": "TestLoadBalancer2C77D7E0",
         },
-        "Port": 2457,
+        "Port": 2456,
         "Protocol": "UDP",
       },
       "Type": "AWS::ElasticLoadBalancingV2::Listener",
@@ -75,7 +75,7 @@ Object {
         "HealthCheckPort": "80",
         "HealthCheckProtocol": "TCP",
         "HealthyThresholdCount": 2,
-        "Port": 2457,
+        "Port": 2456,
         "Protocol": "UDP",
         "TargetType": "ip",
         "UnhealthyThresholdCount": 2,
@@ -208,10 +208,10 @@ Object {
         "SecurityGroupIngress": Array [
           Object {
             "CidrIp": "0.0.0.0/0",
-            "Description": "from 0.0.0.0/0:UDP 2457",
-            "FromPort": 2457,
+            "Description": "from 0.0.0.0/0:UDP 2456",
+            "FromPort": 2456,
             "IpProtocol": "udp",
-            "ToPort": 2457,
+            "ToPort": 2456,
           },
           Object {
             "CidrIp": Object {
@@ -275,7 +275,7 @@ Object {
         "LoadBalancers": Array [
           Object {
             "ContainerName": "server",
-            "ContainerPort": 2457,
+            "ContainerPort": 2456,
             "TargetGroupArn": Object {
               "Ref": "TestLoadBalancerListenerTargetsGroup11BB5877",
             },
@@ -325,8 +325,8 @@ Object {
             "Name": "server",
             "PortMappings": Array [
               Object {
-                "ContainerPort": 2457,
-                "HostPort": 2457,
+                "ContainerPort": 2456,
+                "HostPort": 2456,
                 "Protocol": "udp",
               },
             ],

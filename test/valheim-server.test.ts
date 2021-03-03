@@ -22,7 +22,7 @@ test('ECS cluster is created', () => {
   expect(stack).toHaveResource('AWS::ECS::Cluster');
 });
 
-test('SecurityGroup allows UDP 2457 from everywhere, and 80 from the VPC', () => {
+test('SecurityGroup allows UDP 2456 from everywhere, and 80 from the VPC', () => {
   const stack = new Stack();
   new ValheimServer(stack, 'Test');
 
@@ -30,10 +30,10 @@ test('SecurityGroup allows UDP 2457 from everywhere, and 80 from the VPC', () =>
     SecurityGroupIngress: [
       {
         CidrIp: '0.0.0.0/0',
-        Description: 'from 0.0.0.0/0:UDP 2457',
-        FromPort: 2457,
+        Description: 'from 0.0.0.0/0:UDP 2456',
+        FromPort: 2456,
         IpProtocol: 'udp',
-        ToPort: 2457,
+        ToPort: 2456,
       },
       {
         CidrIp: {

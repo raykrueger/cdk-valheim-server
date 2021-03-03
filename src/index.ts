@@ -5,7 +5,7 @@ import * as elb from '@aws-cdk/aws-elasticloadbalancingv2';
 import * as secretsmanager from '@aws-cdk/aws-secretsmanager';
 import { Construct } from '@aws-cdk/core';
 
-const VALHEIM_PORT = 2457;
+const VALHEIM_PORT = 2456;
 const VALHEIM_SAVE_DIR = '/root/.config/unity3d/IronGate/Valheim';
 
 const DEFAULT_VCPU = 1024;
