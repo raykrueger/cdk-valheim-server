@@ -22,7 +22,7 @@ const project = new AwsCdkConstructLibrary({
   ],
   cdkAssert: true,
   docgen: true,
-  releaseBranches: ['master'],
+  releaseBranches: ['main'],
   releaseToNpm: true,
   releaseWorkflow: true,
   releaseEveryCommit: true,
