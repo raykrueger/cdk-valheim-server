@@ -85,6 +85,40 @@ Object {
       },
       "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
     },
+    "TestLoadBalancerOtherListener09A8DFA9": Object {
+      "Properties": Object {
+        "DefaultActions": Array [
+          Object {
+            "TargetGroupArn": Object {
+              "Ref": "TestLoadBalancerOtherListenerTargetsGroup567E0D68",
+            },
+            "Type": "forward",
+          },
+        ],
+        "LoadBalancerArn": Object {
+          "Ref": "TestLoadBalancer2C77D7E0",
+        },
+        "Port": 2457,
+        "Protocol": "UDP",
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::Listener",
+    },
+    "TestLoadBalancerOtherListenerTargetsGroup567E0D68": Object {
+      "Properties": Object {
+        "HealthCheckEnabled": true,
+        "HealthCheckPort": "80",
+        "HealthCheckProtocol": "TCP",
+        "HealthyThresholdCount": 2,
+        "Port": 2457,
+        "Protocol": "UDP",
+        "TargetType": "ip",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": Object {
+          "Ref": "TestVPCBD247556",
+        },
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+    },
     "TestMyEfsFileSystem8F7C7AD3": Object {
       "DeletionPolicy": "Retain",
       "Properties": Object {
@@ -214,6 +248,13 @@ Object {
             "ToPort": 2456,
           },
           Object {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "from 0.0.0.0/0:UDP 2457",
+            "FromPort": 2457,
+            "IpProtocol": "udp",
+            "ToPort": 2457,
+          },
+          Object {
             "CidrIp": Object {
               "Fn::GetAtt": Array [
                 "TestVPCBD247556",
@@ -250,6 +291,8 @@ Object {
       "DependsOn": Array [
         "TestLoadBalancerListenerE0D6931B",
         "TestLoadBalancerListenerTargetsGroup11BB5877",
+        "TestLoadBalancerOtherListener09A8DFA9",
+        "TestLoadBalancerOtherListenerTargetsGroup567E0D68",
       ],
       "Properties": Object {
         "CapacityProviderStrategy": Array [
@@ -278,6 +321,13 @@ Object {
             "ContainerPort": 2456,
             "TargetGroupArn": Object {
               "Ref": "TestLoadBalancerListenerTargetsGroup11BB5877",
+            },
+          },
+          Object {
+            "ContainerName": "server",
+            "ContainerPort": 2457,
+            "TargetGroupArn": Object {
+              "Ref": "TestLoadBalancerOtherListenerTargetsGroup567E0D68",
             },
           },
         ],
@@ -327,6 +377,11 @@ Object {
               Object {
                 "ContainerPort": 2456,
                 "HostPort": 2456,
+                "Protocol": "udp",
+              },
+              Object {
+                "ContainerPort": 2457,
+                "HostPort": 2457,
                 "Protocol": "udp",
               },
             ],

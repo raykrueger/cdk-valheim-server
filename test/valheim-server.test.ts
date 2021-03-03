@@ -4,28 +4,22 @@ import '@aws-cdk/assert/jest';
 
 import { ValheimServer } from '../src/index';
 
+const stack = new Stack();
+new ValheimServer(stack, 'Test');
+
 test('snapshot', () => {
-  const stack = new Stack();
-  new ValheimServer(stack, 'Test');
   expect(SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
 });
 
 test('default vpc is created', () => {
-  const stack = new Stack();
-  new ValheimServer(stack, 'Test');
   expect(stack).toHaveResource('AWS::EC2::VPC');
 });
 
 test('ECS cluster is created', () => {
-  const stack = new Stack();
-  new ValheimServer(stack, 'Test');
   expect(stack).toHaveResource('AWS::ECS::Cluster');
 });
 
-test('SecurityGroup allows UDP 2456 from everywhere, and 80 from the VPC', () => {
-  const stack = new Stack();
-  new ValheimServer(stack, 'Test');
-
+test('SecurityGroup allows UDP 2456-2457 from everywhere, and 80 from the VPC', () => {
   expect(stack).toHaveResourceLike('AWS::EC2::SecurityGroup', {
     SecurityGroupIngress: [
       {
@@ -34,6 +28,13 @@ test('SecurityGroup allows UDP 2456 from everywhere, and 80 from the VPC', () =>
         FromPort: 2456,
         IpProtocol: 'udp',
         ToPort: 2456,
+      },
+      {
+        CidrIp: '0.0.0.0/0',
+        Description: 'from 0.0.0.0/0:UDP 2457',
+        FromPort: 2457,
+        IpProtocol: 'udp',
+        ToPort: 2457,
       },
       {
         CidrIp: {

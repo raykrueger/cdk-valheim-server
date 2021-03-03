@@ -51,7 +51,7 @@ export interface ValheimServerProps {
 
   /**
    * Memory limit in 1024 incrmements.
-   * @see https://aws.amazon.com/fargate/pricing/
+   * @see https://aws.amazon.com/fargate/prici/
    * @default DEFAULT_VCPU
    */
   readonly memoryLimitMiB?: number;
@@ -147,11 +147,13 @@ export class ValheimServer extends Construct {
     });
     containerDef.addMountPoints({ sourceVolume: 'efsVolume', containerPath: VALHEIM_SAVE_DIR, readOnly: false });
     containerDef.addPortMappings({ containerPort: VALHEIM_PORT, hostPort: VALHEIM_PORT, protocol: ecs.Protocol.UDP });
+    containerDef.addPortMappings({ containerPort: VALHEIM_PORT+1, hostPort: VALHEIM_PORT+1, protocol: ecs.Protocol.UDP });
 
     const securityGroup = new ec2.SecurityGroup(this, 'SecurityGroup', {
       vpc: this.vpc,
     });
     securityGroup.addIngressRule(ec2.Peer.anyIpv4(), ec2.Port.udp(VALHEIM_PORT));
+    securityGroup.addIngressRule(ec2.Peer.anyIpv4(), ec2.Port.udp(VALHEIM_PORT+1));
 
     //Super important! Tell EFS to allow this SecurityGroup in to access the filesystem
     //Note that fs.connections.allowDefaultPortFrom(cluster) did not work here, I'll look into that later.
@@ -203,7 +205,22 @@ export class ValheimServer extends Construct {
       port: VALHEIM_PORT,
       protocol: elb.Protocol.UDP,
       targets: [service.loadBalancerTarget({ containerName: 'server', protocol: ecs.Protocol.UDP, containerPort: VALHEIM_PORT })],
-      healthCheck: { //NOTE we are healtchecking our nginx sidecar here, not the Valheim game itself
+      healthCheck: { //NOTE we are healthchecking our nginx sidecar here, not the Valheim game itself
+        enabled: true,
+        port: '80',
+        protocol: elb.Protocol.TCP,
+        healthyThresholdCount: 2,
+        unhealthyThresholdCount: 2,
+      },
+    });
+
+    //The NLB cannot do port ranges, so here we are.
+    const otherListener = lb.addListener('OtherListener', { port: VALHEIM_PORT+1, protocol: elb.Protocol.UDP });
+    otherListener.addTargets('Targets', {
+      port: VALHEIM_PORT+1,
+      protocol: elb.Protocol.UDP,
+      targets: [service.loadBalancerTarget({ containerName: 'server', protocol: ecs.Protocol.UDP, containerPort: VALHEIM_PORT+1 })],
+      healthCheck: { //NOTE we are healthchecking our nginx sidecar here, not the Valheim game itself
         enabled: true,
         port: '80',
         protocol: elb.Protocol.TCP,
