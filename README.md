@@ -9,11 +9,17 @@ more information.
 
 ## Summary
 
-The game world is persisted to an Amazon Elastic File System (EFS) file
-system. So in the case of a server container shutdown the game world
-files will be attached to the container when it starts elsewhere. The game
-server runs using Fargate Spot Pricing to keep costs down, but this also
-means it might be interrupted depending on availability.
+This CDK Construct will deploy Valheim using the
+[raykrueger/valheim](https://hub.docker.com/r/raykrueger/valheim) Docker
+container. The container is deployed to an Amazon ECS Cluster, running on AWS
+Fargate. The game world is persisted to Amazon Elastic File System. The game
+server is exposed to the internet via a Network Load Balancer.
+
+The server should run with pretty high resilliency. Given that the world is
+saved to an EFS file system, and the ECS Cluster is running across multipe
+availability zones, the server can die in one Availability Zone and come up
+in another with a low risk of loss. This is a beta game, and stuff happens,
+so you may want to consider enabling AWS Backup for your EFS filesystem.
 
 ## Sample Application
 
