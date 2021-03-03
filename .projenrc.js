@@ -26,7 +26,7 @@ const project = new AwsCdkConstructLibrary({
   releaseToNpm: true,
   releaseWorkflow: true,
   releaseEveryCommit: true,
-
+  antitamper: false, //Turning this off because I keep commmitting changes while builds are running
 
   /* AwsCdkConstructLibraryOptions */
   // cdkAssert: true,                                                          /* Install the @aws-cdk/assert library? */
