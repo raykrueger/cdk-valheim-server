@@ -4,7 +4,7 @@
 
 Name|Description
 ----|-----------
-[ValheimServer](#raykrueger-cdk-valheim-server-valheimserver)|*No description*
+[ValheimServer](#raykrueger-cdk-valheim-server-valheimserver)|Builds a ValheimServer, running on ECS Fargate.
 
 
 **Structs**
@@ -17,7 +17,17 @@ Name|Description
 
 ## class ValheimServer  <a id="raykrueger-cdk-valheim-server-valheimserver"></a>
 
+Builds a ValheimServer, running on ECS Fargate.
 
+This is designed to run as
+cheaply as possible, which means some availability and reliability has been
+sacrificed.
+
+Default configuration:
+    Single AZ with a Single Public Subnet
+    Fargate Spot capacity provider
+    EFS General performance file system for storage
+    NLB for static IP and DNS
 
 __Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
 __Extends__: [Construct](#aws-cdk-core-construct)
@@ -34,6 +44,7 @@ new ValheimServer(scope: Construct, id: string, props?: ValheimServerProps)
 * **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[ValheimServerProps](#raykrueger-cdk-valheim-server-valheimserverprops)</code>)  *No description*
+  * **assignPublicIp** (<code>boolean</code>)  If we are deployed in a public subnet we need a public IP assigned to access the internet. __*Default*__: true
   * **containerInsights** (<code>boolean</code>)  Do we want to enable Cloudwatch Container Insights, and incur additional cost? __*Default*__: false
   * **cpu** (<code>number</code>)  vCpu amout to be granted to ECS Fargate task. __*Default*__: DEFAULT_VCPU
   * **generatedServerPasswordSecretName** (<code>string</code>)  If we are generating a random password, what name will it be stored under in Secrets Manager? __*Default*__: DEFAULT_SERVER_PASSWORD_SECRET_NAME
@@ -50,6 +61,7 @@ new ValheimServer(scope: Construct, id: string, props?: ValheimServerProps)
 
 Name | Type | Description 
 -----|------|-------------
+**assignPublicIp** | <code>boolean</code> | <span></span>
 **containerInsights** | <code>boolean</code> | <span></span>
 **cpu** | <code>number</code> | <span></span>
 **generatedServerPasswordSecretName** | <code>string</code> | <span></span>
@@ -70,6 +82,7 @@ Name | Type | Description
 
 Name | Type | Description 
 -----|------|-------------
+**assignPublicIp**? | <code>boolean</code> | If we are deployed in a public subnet we need a public IP assigned to access the internet.<br/>__*Default*__: true
 **containerInsights**? | <code>boolean</code> | Do we want to enable Cloudwatch Container Insights, and incur additional cost?<br/>__*Default*__: false
 **cpu**? | <code>number</code> | vCpu amout to be granted to ECS Fargate task.<br/>__*Default*__: DEFAULT_VCPU
 **generatedServerPasswordSecretName**? | <code>string</code> | If we are generating a random password, what name will it be stored under in Secrets Manager?<br/>__*Default*__: DEFAULT_SERVER_PASSWORD_SECRET_NAME

@@ -3,7 +3,7 @@ import * as ecs from '@aws-cdk/aws-ecs';
 import * as efs from '@aws-cdk/aws-efs';
 import * as elb from '@aws-cdk/aws-elasticloadbalancingv2';
 import * as secretsmanager from '@aws-cdk/aws-secretsmanager';
-import { Construct } from '@aws-cdk/core';
+import { Construct, RemovalPolicy } from '@aws-cdk/core';
 
 const VALHEIM_PORT = 2456;
 const VALHEIM_SAVE_DIR = '/root/.config/unity3d/IronGate/Valheim';
@@ -71,8 +71,26 @@ export interface ValheimServerProps {
    * @default DEFAULT_IMAGE
    */
   readonly image?: string;
-}
 
+  /**
+   * If we are deployed in a public subnet we need a public IP assigned to
+   * access the internet. By default we deploy to a public VPC.
+   *
+   * @default true
+   */
+  readonly assignPublicIp?: boolean; }
+
+/**
+ * Builds a ValheimServer, running on ECS Fargate. This is designed to run as
+ * cheaply as possible, which means some availability and reliability has been
+ * sacrificed.
+ *
+ * Default configuration:
+ *    Single AZ with a Single Public Subnet
+ *    Fargate Spot capacity provider
+ *    EFS General performance file system for storage
+ *    NLB for static IP and DNS
+ */
 export class ValheimServer extends Construct {
 
   //Offer properties for things we may have created
@@ -84,18 +102,34 @@ export class ValheimServer extends Construct {
   readonly generatedServerPasswordSecretName: string;
   readonly containerInsights: boolean;
   readonly logging: ecs.LogDriver | undefined;
+  readonly assignPublicIp: boolean;
 
   constructor(scope: Construct, id: string, props: ValheimServerProps = {}) {
     super(scope, id);
 
     //Setup some defaults
-    this.vpc = props.vpc || new ec2.Vpc(this, 'VPC');
+    /**
+     * Default VPC is designed to make this as cheap as possible.
+     * We are trading off reliability for cost by making a single AZ VPC.
+     * The Single AZ has a single Public subnet.
+     */
+    this.vpc = props.vpc || new ec2.Vpc(this, 'VPC', {
+      maxAzs: 1,
+      subnetConfiguration: [
+        {
+          name: 'Public',
+          subnetType: ec2.SubnetType.PUBLIC,
+        },
+      ],
+    });
+
     this.cpu = props.cpu || DEFAULT_VCPU;
     this.memoryLimitMiB = props.memoryLimitMiB || DEFAULT_MEMORY;
     this.image = props.image || DEFAULT_IMAGE;
     this.generatedServerPasswordSecretName = props.generatedServerPasswordSecretName || DEFAULT_SERVER_PASSWORD_SECRET_NAME;
     this.containerInsights = !!props.containerInsights;
     this.logging = props.logging;
+    this.assignPublicIp = (props.assignPublicIp == undefined) ? true : false;
 
     this.serverPasswordSecret = props.serverPasswordSecret || new secretsmanager.Secret(this, 'GeneratedServerPasswordSecret', {
       secretName: props.generatedServerPasswordSecretName,
@@ -110,8 +144,10 @@ export class ValheimServer extends Construct {
       encrypted: true,
       lifecyclePolicy: efs.LifecyclePolicy.AFTER_14_DAYS,
       performanceMode: efs.PerformanceMode.GENERAL_PURPOSE,
+      removalPolicy: RemovalPolicy.RETAIN,
     });
     fs.addAccessPoint('AccessPoint');
+    fs.connections.allowDefaultPortInternally();
 
     //Create our ECS Cluster
     const cluster = new ecs.Cluster(this, 'Cluster', {
@@ -170,7 +206,7 @@ export class ValheimServer extends Construct {
       desiredCount: 1,
       securityGroups: [securityGroup],
       platformVersion: ecs.FargatePlatformVersion.VERSION1_4,
-      assignPublicIp: false,
+      assignPublicIp: this.assignPublicIp,
       capacityProviderStrategies: [
         {
           capacityProvider: 'FARGATE_SPOT',
