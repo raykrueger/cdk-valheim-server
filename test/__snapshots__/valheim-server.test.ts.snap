@@ -73,6 +73,12 @@ Object {
         "HealthyThresholdCount": 2,
         "Port": 2456,
         "Protocol": "UDP",
+        "TargetGroupAttributes": Array [
+          Object {
+            "Key": "deregistration_delay.timeout_seconds",
+            "Value": "30",
+          },
+        ],
         "TargetType": "ip",
         "UnhealthyThresholdCount": 2,
         "VpcId": Object {
@@ -107,6 +113,12 @@ Object {
         "HealthyThresholdCount": 2,
         "Port": 2457,
         "Protocol": "UDP",
+        "TargetGroupAttributes": Array [
+          Object {
+            "Key": "deregistration_delay.timeout_seconds",
+            "Value": "30",
+          },
+        ],
         "TargetType": "ip",
         "UnhealthyThresholdCount": 2,
         "VpcId": Object {

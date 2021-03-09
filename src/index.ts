@@ -3,7 +3,7 @@ import * as ecs from '@aws-cdk/aws-ecs';
 import * as efs from '@aws-cdk/aws-efs';
 import * as elb from '@aws-cdk/aws-elasticloadbalancingv2';
 import * as secretsmanager from '@aws-cdk/aws-secretsmanager';
-import { Construct, RemovalPolicy } from '@aws-cdk/core';
+import { Construct, Duration, RemovalPolicy } from '@aws-cdk/core';
 
 const VALHEIM_PORT = 2456;
 const VALHEIM_SAVE_DIR = '/root/.config/unity3d/IronGate/Valheim';
@@ -248,6 +248,7 @@ export class ValheimServer extends Construct {
         healthyThresholdCount: 2,
         unhealthyThresholdCount: 2,
       },
+      deregistrationDelay: Duration.seconds(30),
     });
 
     //The NLB cannot do port ranges, so here we are.
@@ -263,6 +264,7 @@ export class ValheimServer extends Construct {
         healthyThresholdCount: 2,
         unhealthyThresholdCount: 2,
       },
+      deregistrationDelay: Duration.seconds(30),
     });
   }
 }
