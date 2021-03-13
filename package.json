@@ -30,7 +30,7 @@
     "organization": false
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^1.90.1",
+    "@aws-cdk/assert": "1.90.1",
     "@types/jest": "^26.0.20",
     "@types/node": "^10.17.0",
     "@typescript-eslint/eslint-plugin": "^4.16.1",
@@ -46,28 +46,28 @@
     "jsii-docgen": "^1.8.60",
     "jsii-pacmak": "^1.23.0",
     "json-schema": "^0.3.0",
-    "projen": "^0.16.29",
+    "projen": "^0.16.42",
     "standard-version": "^9",
     "ts-jest": "^26.5.2",
     "typedoc": "^0.20.28",
     "typescript": "^4.2.2"
   },
   "peerDependencies": {
-    "@aws-cdk/aws-ec2": "^1.90.1",
-    "@aws-cdk/aws-ecs": "^1.90.1",
-    "@aws-cdk/aws-efs": "^1.90.1",
-    "@aws-cdk/aws-elasticloadbalancingv2": "^1.90.1",
-    "@aws-cdk/aws-secretsmanager": "^1.90.1",
-    "@aws-cdk/core": "^1.90.1",
+    "@aws-cdk/aws-ec2": "1.90.1",
+    "@aws-cdk/aws-ecs": "1.90.1",
+    "@aws-cdk/aws-efs": "1.90.1",
+    "@aws-cdk/aws-elasticloadbalancingv2": "1.90.1",
+    "@aws-cdk/aws-secretsmanager": "1.90.1",
+    "@aws-cdk/core": "1.90.1",
     "constructs": "^3.2.27"
   },
   "dependencies": {
-    "@aws-cdk/aws-ec2": "^1.90.1",
-    "@aws-cdk/aws-ecs": "^1.90.1",
-    "@aws-cdk/aws-efs": "^1.90.1",
-    "@aws-cdk/aws-elasticloadbalancingv2": "^1.90.1",
-    "@aws-cdk/aws-secretsmanager": "^1.90.1",
-    "@aws-cdk/core": "^1.90.1"
+    "@aws-cdk/aws-ec2": "1.90.1",
+    "@aws-cdk/aws-ecs": "1.90.1",
+    "@aws-cdk/aws-efs": "1.90.1",
+    "@aws-cdk/aws-elasticloadbalancingv2": "1.90.1",
+    "@aws-cdk/aws-secretsmanager": "1.90.1",
+    "@aws-cdk/core": "1.90.1"
   },
   "bundledDependencies": [],
   "keywords": [
