@@ -2,7 +2,7 @@
   "dependencies": [
     {
       "name": "@aws-cdk/assert",
-      "version": "1.90.1",
+      "version": "1.94.1",
       "type": "build"
     },
     {
@@ -91,32 +91,32 @@
     },
     {
       "name": "@aws-cdk/aws-ec2",
-      "version": "1.90.1",
+      "version": "1.94.1",
       "type": "peer"
     },
     {
       "name": "@aws-cdk/aws-ecs",
-      "version": "1.90.1",
+      "version": "1.94.1",
       "type": "peer"
     },
     {
       "name": "@aws-cdk/aws-efs",
-      "version": "1.90.1",
+      "version": "1.94.1",
       "type": "peer"
     },
     {
       "name": "@aws-cdk/aws-elasticloadbalancingv2",
-      "version": "1.90.1",
+      "version": "1.94.1",
       "type": "peer"
     },
     {
       "name": "@aws-cdk/aws-secretsmanager",
-      "version": "1.90.1",
+      "version": "1.94.1",
       "type": "peer"
     },
     {
       "name": "@aws-cdk/core",
-      "version": "1.90.1",
+      "version": "1.94.1",
       "type": "peer"
     },
     {
@@ -126,32 +126,32 @@
     },
     {
       "name": "@aws-cdk/aws-ec2",
-      "version": "1.90.1",
+      "version": "1.94.1",
       "type": "runtime"
     },
     {
       "name": "@aws-cdk/aws-ecs",
-      "version": "1.90.1",
+      "version": "1.94.1",
       "type": "runtime"
     },
     {
       "name": "@aws-cdk/aws-efs",
-      "version": "1.90.1",
+      "version": "1.94.1",
       "type": "runtime"
     },
     {
       "name": "@aws-cdk/aws-elasticloadbalancingv2",
-      "version": "1.90.1",
+      "version": "1.94.1",
       "type": "runtime"
     },
     {
       "name": "@aws-cdk/aws-secretsmanager",
-      "version": "1.90.1",
+      "version": "1.94.1",
       "type": "runtime"
     },
     {
       "name": "@aws-cdk/core",
-      "version": "1.90.1",
+      "version": "1.94.1",
       "type": "runtime"
     }
   ],

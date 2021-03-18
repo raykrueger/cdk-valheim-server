@@ -6,7 +6,7 @@ const project = new AwsCdkConstructLibrary({
   authorAddress: 'raykrueger@gmail.com',
   description: 'A CDK construct library for running a Valheim dedicated server on AWS',
   projectType: ProjectType.LIB,
-  cdkVersion: '1.90.1',
+  cdkVersion: '1.94.1',
   defaultReleaseBranch: 'main',
   jsiiFqn: 'projen.AwsCdkConstructLibrary',
   repositoryUrl: 'https://github.com/user/cdk-valheim-server.git',
