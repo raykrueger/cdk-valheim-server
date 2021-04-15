@@ -21,6 +21,7 @@ const project = new AwsCdkConstructLibrary({
     '@aws-cdk/core',
   ],
   cdkAssert: true,
+  dependabot: false,
   docgen: true,
   releaseBranches: ['main'],
   releaseToNpm: true,
