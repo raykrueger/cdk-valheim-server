@@ -23,6 +23,7 @@ class GameStack extends Stack {
     new GameServer(this, "Valheim", {
       gamePorts: [
         {portNumber: 2456, protocol: ecs.Protocol.UDP},
+        {portNumber: 2457, protocol: ecs.Protocol.UDP},
       ],
       mountTarget: "/root/.config/unity3d/IronGate/Valheim",
       image: ecs.ContainerImage.fromRegistry("raykrueger/valheim"),
