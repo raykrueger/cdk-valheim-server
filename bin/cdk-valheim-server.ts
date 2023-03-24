@@ -2,7 +2,7 @@
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
 import { GameServer } from '@raykrueger/cdk-game-server';
-import { Stack, StackProps } from 'aws-cdk-lib';
+import { CfnOutput, Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as ecs from 'aws-cdk-lib/aws-ecs';
 import { Secret } from 'aws-cdk-lib/aws-secretsmanager';
@@ -20,7 +20,7 @@ class GameStack extends Stack {
       },
     });
   
-    new GameServer(this, "Valheim", {
+    const server = new GameServer(this, "Valheim", {
       gamePorts: [
         {portNumber: 2456, protocol: ecs.Protocol.UDP},
         {portNumber: 2457, protocol: ecs.Protocol.UDP},
@@ -30,6 +30,10 @@ class GameStack extends Stack {
       containerSecrets: {
         SERVER_PASSWORD: ecs.Secret.fromSecretsManager(serverPasswordSecret),
       }
+    })
+
+    new CfnOutput(this, "CLIOutput", {
+      value: `aws ecs update-service --cluster ${server.cluster.clusterName} --service ${server.service.serviceName} --desired-count 1`
     })
   }
 }
