@@ -9,7 +9,15 @@ This repository serves as an example of deploying
 You will need NodeJS 16.x or better installed.
 
 To deploy your own Valheim server on AWS simply clone this repo, make any
-changes you'd like, and run <br/>`npx cdk deploy`. This will deploy Vaheim to ECS
+changes you'd like, and deploy it.
+
+``` bash
+git clone https://github.com/raykrueger/cdk-valheim-server.git
+cd cdk-valheim-server
+npx cdk deploy
+```
+
+This will deploy Vaheim to ECS
 Fargate Spot. It will automatically shutdown if idle. It can be scaled up in the
 ECS UI, via the AWS CLI, or by enabling the [Discord
 bot](https://github.com/raykrueger/cdk-game-server).
